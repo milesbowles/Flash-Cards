@@ -6,29 +6,18 @@
     // The constructor should throw or log an error when the cloze deletion does not appear in the input text.
     // Use prototypes to attach these methods, wherever possible.
 
-    // Examples
+    exports.ClozeCard = function(text, cloze) {
+        // Convert the incoming strings to lower case
+        var textToLower = text.toLowerCase();
+        var clozeToLower = cloze.toLowerCase();
 
-    // Your constructors should work as follows.
-        var firstPresident = new BasicCard(
-        "Who was the first president of the United States?", "George Washington");
+        // Confirm that the cloze statement appears within the complete text
+        if (!textToLower.includes(clozeToLower)) {
+            console.log('ERROR: cloze-deletion does not appear within full text -- <' + cloze + '>');
+            return;
+        }
 
-    // "Who was the first president of the United States?"
-    console.log(firstPresident.front);
-
-    // "George Washington"
-    console.log(firstPresident.back);
-
-    var firstPresidentCloze = new ClozeCard(
-        "George Washington was the first president of the United States.", "George Washington");
-
-    // "George Washington"
-    console.log(firstPresidentCloze.cloze);
-
-    // " ... was the first president of the United States.
-    console.log(firstPresidentCloze.partial); "
-
-    // "George Washington was the first president of the United States.
-    console.log(firstPresidentCloze.fullText): "
-
-    // Should throw or log an error because "oops" doesn't appear in "This doesn't work"
-    var brokenCloze = new ClozeCard("This doesn't work", "oops");
+        this.fullText = text;
+        this.cloze = cloze;
+        this.partial = text.replace(cloze, '...');
+    };
